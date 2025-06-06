@@ -122,7 +122,7 @@ export class MyMCP extends McpAgent {
 						? normalize(product.category) === normalize(category)
 						: true;
 					const matchesStock =
-						inStock === undefined ? true : product.inStock === inStock;
+						inStock === undefined ? true : product.inStock === (typeof inStock === "string" ? inStock === "true" : inStock);
 					return matchesQuery && matchesCategory && matchesStock;
 				});
 				if (results.length === 0) {
