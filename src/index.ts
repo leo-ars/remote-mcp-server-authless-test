@@ -60,46 +60,46 @@ export class MyMCP extends McpAgent {
 		const fakeProducts = [
 			{
 				id: 1,
-				name: "Trailblazer Hiking Shoes",
-				description: "Durable hiking shoes for all terrains, waterproof and breathable.",
+				name: "Trailblazer Hiking Shoes / Chaussures de randonnée Trailblazer",
+				description: "Durable hiking shoes for all terrains, waterproof and breathable. Chaussures de randonnée durables pour tous les terrains, imperméables et respirantes.",
 				price: 89.99,
-				category: "Hiking",
+				category: "Hiking / Randonnée",
 				inStock: true,
 				paymentLink: "https://pay.example.com/product/1",
 			},
 			{
 				id: 2,
-				name: "SpeedRunner Running Shoes",
-				description: "Lightweight running shoes with superior cushioning for long distances.",
+				name: "SpeedRunner Running Shoes / Chaussures de course SpeedRunner",
+				description: "Lightweight running shoes with superior cushioning for long distances. Chaussures de course légères avec un excellent amorti pour les longues distances.",
 				price: 74.99,
-				category: "Running",
+				category: "Running / Course",
 				inStock: true,
 				paymentLink: "https://pay.example.com/product/2",
 			},
 			{
 				id: 3,
-				name: "UrbanWalk Casual Sneakers",
-				description: "Comfortable sneakers for everyday city walks and casual wear.",
+				name: "UrbanWalk Casual Sneakers / Baskets décontractées UrbanWalk",
+				description: "Comfortable sneakers for everyday city walks and casual wear. Baskets confortables pour les promenades en ville et un usage quotidien.",
 				price: 59.99,
-				category: "Casual",
+				category: "Casual / Décontracté",
 				inStock: false,
 				paymentLink: "https://pay.example.com/product/3",
 			},
 			{
 				id: 4,
-				name: "AllCourt Basketball Shoes",
-				description: "High-top shoes for maximum ankle support on the court.",
+				name: "AllCourt Basketball Shoes / Chaussures de basketball AllCourt",
+				description: "High-top shoes for maximum ankle support on the court. Chaussures montantes pour un maintien optimal de la cheville sur le terrain.",
 				price: 99.99,
-				category: "Basketball",
+				category: "Basketball / Basket",
 				inStock: true,
 				paymentLink: "https://pay.example.com/product/4",
 			},
 			{
 				id: 5,
-				name: "ProTurf Soccer Cleats",
-				description: "Professional-grade cleats for firm ground soccer fields.",
+				name: "ProTurf Soccer Cleats / Chaussures de football ProTurf",
+				description: "Professional-grade cleats for firm ground soccer fields. Chaussures à crampons de qualité professionnelle pour terrains de football secs.",
 				price: 84.99,
-				category: "Soccer",
+				category: "Soccer / Football",
 				inStock: true,
 				paymentLink: "https://pay.example.com/product/5",
 			},
@@ -113,12 +113,13 @@ export class MyMCP extends McpAgent {
 				inStock: z.boolean().optional().describe("Filter by stock availability"),
 			},
 			async ({ query, category, inStock }) => {
+				const normalize = (str: string) => str.toLowerCase().normalize("NFD").replace(/\p{Diacritic}/gu, "");
 				const results = fakeProducts.filter((product) => {
 					const matchesQuery =
-						product.name.toLowerCase().includes(query.toLowerCase()) ||
-						product.description.toLowerCase().includes(query.toLowerCase());
+						normalize(product.name).includes(normalize(query)) ||
+						normalize(product.description).includes(normalize(query));
 					const matchesCategory = category
-						? product.category.toLowerCase() === category.toLowerCase()
+						? normalize(product.category) === normalize(category)
 						: true;
 					const matchesStock =
 						inStock === undefined ? true : product.inStock === inStock;
