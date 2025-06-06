@@ -60,43 +60,48 @@ export class MyMCP extends McpAgent {
 		const fakeProducts = [
 			{
 				id: 1,
-				name: "Wireless Mouse",
-				description: "A smooth and responsive wireless mouse.",
-				price: 19.99,
-				category: "Electronics",
+				name: "Trailblazer Hiking Shoes",
+				description: "Durable hiking shoes for all terrains, waterproof and breathable.",
+				price: 89.99,
+				category: "Hiking",
 				inStock: true,
+				paymentLink: "https://pay.example.com/product/1",
 			},
 			{
 				id: 2,
-				name: "Bluetooth Headphones",
-				description: "Noise-cancelling over-ear headphones.",
-				price: 59.99,
-				category: "Electronics",
-				inStock: false,
+				name: "SpeedRunner Running Shoes",
+				description: "Lightweight running shoes with superior cushioning for long distances.",
+				price: 74.99,
+				category: "Running",
+				inStock: true,
+				paymentLink: "https://pay.example.com/product/2",
 			},
 			{
 				id: 3,
-				name: "Coffee Mug",
-				description: "Ceramic mug for hot beverages.",
-				price: 7.5,
-				category: "Home & Kitchen",
-				inStock: true,
+				name: "UrbanWalk Casual Sneakers",
+				description: "Comfortable sneakers for everyday city walks and casual wear.",
+				price: 59.99,
+				category: "Casual",
+				inStock: false,
+				paymentLink: "https://pay.example.com/product/3",
 			},
 			{
 				id: 4,
-				name: "Yoga Mat",
-				description: "Non-slip yoga mat for all exercises.",
-				price: 25.0,
-				category: "Sports",
+				name: "AllCourt Basketball Shoes",
+				description: "High-top shoes for maximum ankle support on the court.",
+				price: 99.99,
+				category: "Basketball",
 				inStock: true,
+				paymentLink: "https://pay.example.com/product/4",
 			},
 			{
 				id: 5,
-				name: "Desk Lamp",
-				description: "LED desk lamp with adjustable brightness.",
-				price: 15.99,
-				category: "Home & Kitchen",
+				name: "ProTurf Soccer Cleats",
+				description: "Professional-grade cleats for firm ground soccer fields.",
+				price: 84.99,
+				category: "Soccer",
 				inStock: true,
+				paymentLink: "https://pay.example.com/product/5",
 			},
 		];
 
@@ -133,7 +138,7 @@ export class MyMCP extends McpAgent {
 							text: results
 								.map(
 									(p) =>
-										`[${p.name}] $${p.price} (${p.category}) - ${p.inStock ? "In stock" : "Out of stock"}`
+										`[${p.name}] $${p.price} (${p.category}) - ${p.inStock ? "In stock" : "Out of stock"} | Pay: ${p.paymentLink}`
 								)
 								.join("\n"),
 						},
