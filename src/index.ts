@@ -119,7 +119,7 @@ export class MyMCP extends McpAgent {
 						normalize(product.name).includes(normalize(query)) ||
 						normalize(product.description).includes(normalize(query));
 					const matchesCategory = category
-						? normalize(product.category) === normalize(category)
+						? normalize(product.category).includes(normalize(category))
 						: true;
 					const matchesStock =
 						inStock === undefined ? true : product.inStock === (typeof inStock === "string" ? inStock === "true" : inStock);
@@ -132,18 +132,11 @@ export class MyMCP extends McpAgent {
 						],
 					};
 				}
-				// If only one result, return just the payment link for direct access
-				if (results.length === 1) {
-					return {
-						content: [
-							{ type: "text", text: results[0].paymentLink, paymentLink: results[0].paymentLink },
-						],
-					};
-				}
+				// Always return only the payment links for all matching products
 				return {
 					content: results.map((p) => ({
 						type: "text",
-						text: `[${p.name}] $${p.price} (${p.category}) - ${p.inStock ? "In stock" : "Out of stock"}`,
+						text: p.paymentLink,
 						paymentLink: p.paymentLink,
 					})),
 				};
