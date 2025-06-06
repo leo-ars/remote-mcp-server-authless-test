@@ -132,17 +132,11 @@ export class MyMCP extends McpAgent {
 					};
 				}
 				return {
-					content: [
-						{
-							type: "text",
-							text: results
-								.map(
-									(p) =>
-										`[${p.name}] $${p.price} (${p.category}) - ${p.inStock ? "In stock" : "Out of stock"} | Pay: ${p.paymentLink}`
-								)
-								.join("\n"),
-						},
-					],
+					content: results.map((p) => ({
+						type: "text",
+						text: `[${p.name}] $${p.price} (${p.category}) - ${p.inStock ? "In stock" : "Out of stock"}`,
+						paymentLink: p.paymentLink,
+					})),
 				};
 			}
 		);
