@@ -110,7 +110,7 @@ export class MyMCP extends McpAgent {
 			{
 				query: z.string().describe("Search term for product name or description"),
 				category: z.string().optional().describe("Optional product category filter"),
-				inStock: z.boolean().optional().describe("Filter by stock availability"),
+				inStock: z.union([z.boolean(), z.string()]).optional().describe("Filter by stock availability, accepts boolean or string"),
 			},
 			async ({ query, category, inStock }) => {
 				const normalize = (str: string) => str.toLowerCase().normalize("NFD").replace(/\p{Diacritic}/gu, "");
