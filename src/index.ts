@@ -132,6 +132,14 @@ export class MyMCP extends McpAgent {
 						],
 					};
 				}
+				// If only one result, return just the payment link for direct access
+				if (results.length === 1) {
+					return {
+						content: [
+							{ type: "text", text: results[0].paymentLink, paymentLink: results[0].paymentLink },
+						],
+					};
+				}
 				return {
 					content: results.map((p) => ({
 						type: "text",
